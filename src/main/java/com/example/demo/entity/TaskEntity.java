@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 @Entity
@@ -32,7 +33,6 @@ public class TaskEntity {
         this.id = id;
     }
 
-    // Getter and Setter for title
     public String getTitle() {
         return title;
     }
@@ -41,7 +41,7 @@ public class TaskEntity {
         this.title = title;
     }
 
-    // Getter and Setter for description
+
     public String getDescription() {
         return description;
     }
@@ -50,7 +50,7 @@ public class TaskEntity {
         this.description = description;
     }
 
-    // Getter and Setter for location
+
     public String getLocation() {
         return location;
     }
@@ -59,7 +59,7 @@ public class TaskEntity {
         this.location = location;
     }
 
-    // Getter and Setter for skillsRequired
+
     public String getSkillsRequired() {
         return skillsRequired;
     }
@@ -68,7 +68,7 @@ public class TaskEntity {
         this.skillsRequired = skillsRequired;
     }
 
-    // Getter and Setter for dateTime
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -77,7 +77,7 @@ public class TaskEntity {
         this.dateTime = dateTime;
     }
 
-    // Getter and Setter for status
+
     public String getStatus() {
         return status;
     }
@@ -86,7 +86,7 @@ public class TaskEntity {
         this.status = status;
     }
 
-    // Getter and Setter for createdBy
+
     public UserEntity getCreatedBy() {
         return createdBy;
     }

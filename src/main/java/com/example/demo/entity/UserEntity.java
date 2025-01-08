@@ -22,7 +22,7 @@ public class UserEntity {
         this.userId = userId;
     }
 
-    // Getter and Setter for userName
+
     public String getUserName() {
         return userName;
     }
@@ -31,7 +31,7 @@ public class UserEntity {
         this.userName = userName;
     }
 
-    // Getter and Setter for password
+
     public String getPassword() {
         return password;
     }

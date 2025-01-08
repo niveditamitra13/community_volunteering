@@ -14,19 +14,19 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // Create Task
+
     @PostMapping
     public TaskEntity createTask(@RequestBody TaskEntity task) {
         return taskService.createTask(task);
     }
 
-    // Get All Tasks
+
     @GetMapping
     public List<TaskEntity> getAllTasks() {
         return taskService.getAllTasks();
     }
 
-    // Get Task by ID
+
     @GetMapping("/{id}")
     public TaskEntity getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
@@ -36,6 +36,12 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public TaskEntity deleteTask(@PathVariable Long id) {
         return taskService.deleteTask(id);
+
+    }
+
+    @PutMapping
+    public TaskEntity editTask(@RequestBody TaskEntity requestedTask) {
+        return taskService.editTask(requestedTask);
 
     }
 
