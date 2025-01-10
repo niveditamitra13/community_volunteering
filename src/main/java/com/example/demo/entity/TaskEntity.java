@@ -1,14 +1,9 @@
 package com.example.demo.entity;
-
 import jakarta.persistence.*;
 import lombok.Builder;
-
 import java.time.LocalDateTime;
 @Entity
 public class TaskEntity {
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
