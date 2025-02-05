@@ -34,4 +34,10 @@ public class UserViewController {
         model.addAttribute("newUser", user);
         return "redirect:/tasks/search"; // Redirect to all users after creation
     }
+
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login"; // Refers to `users.html` template in `templates/`
+    }
 }

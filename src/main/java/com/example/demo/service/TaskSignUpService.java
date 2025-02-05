@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.TaskEntity;
 import com.example.demo.entity.TaskSignUpEntity;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.TaskRepository;
 import com.example.demo.repository.TaskSignUpRepository;
 import com.example.demo.repository.UserRepository;
@@ -33,6 +34,13 @@ public class TaskSignUpService {
 
     public List<TaskSignUpEntity> getAllTaskSignUps() {
         return taskSignUpRepository.findAll();
+    }
+
+    public TaskSignUpEntity deleteTaskSignUp(Long id) {
+        TaskSignUpEntity ts =taskSignUpRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("history not found"));
+        taskSignUpRepository.deleteById(id);
+        return ts;
     }
 
 }

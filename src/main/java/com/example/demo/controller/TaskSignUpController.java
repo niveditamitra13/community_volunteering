@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.TaskEntity;
 import com.example.demo.entity.TaskSignUpEntity;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.service.TaskService;
 import com.example.demo.service.TaskSignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +30,11 @@ public class TaskSignUpController {
     }
 
 
-//    @GetMapping("/{id}")
-//    public TaskEntity getTaskById(@PathVariable Long id) {
-//        return taskService.getTaskById(id);
-//    }
-//
-//
-//    @DeleteMapping("/{id}")
-//    public TaskEntity deleteTask(@PathVariable Long id) {
-//        return taskService.deleteTask(id);
-//
-//    }
+    @DeleteMapping("/{id}")
+    public TaskSignUpEntity deleteUser(@PathVariable Long id) {
+        return taskSignUpService.deleteTaskSignUp(id);
 
-//    @PutMapping
-//    public TaskEntity editTask(@RequestBody TaskEntity requestedTask) {
-//        return taskService.editTask(requestedTask);
-//
-//    }
+    }
 
 
 }

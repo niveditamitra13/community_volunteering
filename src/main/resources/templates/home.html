@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,7 +126,7 @@
             padding-right: 14rem;
             padding-top: 4rem;
             padding-bottom: 24rem;
-            background-image: url("assets/hero_bg.jpg");/* var(--light-color); */
+            background-image: url("../hero_bg.jpg");/* var(--light-color); */
             background-size: cover;
         }
 
@@ -177,7 +177,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <img src="assets/R_all.jpeg" style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"></img>
+        <img th:src="@{/R_all.jpeg}" style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"></img>
         <a class="navbar-brand" href="index.html">Community Volunteering</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -191,7 +191,7 @@
                     <a class="nav-link" href="/users/new">User Registration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="/users/login">Login</a>
                 </li>
             </ul>
         </div>

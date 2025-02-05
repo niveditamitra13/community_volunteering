@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Volunteering</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+        --primary-color: #2C3E50;
+        --secondary-color: #E74C3C;
+        --accent-color: #3498DB;
+        --light-color: #ECF0F1;
+        --button-color: #ca5cdd;
+        --success-color: #22c55e;
+        --background-start: #1e1b4b;
+        --background-end: #312e81;
+        --form-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        color: #f3f4f6;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+
+    /* Navbar Styling */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+        font-weight: 700;
+        color: var(--primary-color) !important;
+        font-size: 1.5rem;
+    }
+
+    .nav-link {
+        color: var(--primary-color) !important;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--secondary-color) !important;
+    }
+
+
+
+    .card-header {
+        background: linear-gradient(135deg, var(--accent-color), var(--button-color));
+        color: white;
+    }
+
+    .btn-success:hover, .btn-primary:hover, .btn-danger:hover {
+        transform: translateY(-2px);
+    }
+
+    .list-group-item {
+        background: var(--form-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <img th:src="@{/R_all.jpeg}" style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"></img>
+    <a class="navbar-brand" href="#">Community Volunteering</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/new">User Registration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tasks/create">Opportunities</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tasks/alltasks">All Tasks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/rating">Rating</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container" style="margin-top: 6rem;">
+  <h1 class="text-center mb-4">Volunteer Opportunities</h1>
+
+  <!-- Task Creation Form -->
+  <div class="card mb-4">
+    <div class="card-header text-center">
+      <h4>Create a New Volunteer Opportunity</h4>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/tasks/create}" th:object="${task}" method="post" id="taskForm">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" name="title" class="form-control" th:field="*{title}" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" name="description" class="form-control" th:field="*{description}" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" id="location" name="location" class="form-control" th:field="*{location}" required>
+        </div>
+        <div class="mb-3">
+          <label for="skillsRequired" class="form-label">Skills Required</label>
+          <input type="text" id="skillsRequired" name="skillsRequired" class="form-control" th:field="*{skillsRequired}" required>
+        </div>
+        <div class="mb-3">
+          <label for="dateTime" class="form-label">Date and Time</label>
+          <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" th:field="*{dateTime}" required>
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" name="status" class="form-select" th:field="*{status}" required>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+        <!-- Hidden input for createdBy -->
+        <input type="hidden" id="createdBy" name="createdBy.userId" th:field="*{createdBy}"/>
+
+        <button type="submit" class="btn btn-primary">Create Task</button>
+      </form>
+
+      <div th:if="${success}" class="alert alert-success mt-3">
+        <p th:text="${success}"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-light py-4 footer-expand-lg">
+  <div class="container text-center">
+    <ul class="list-inline mb-0">
+      <li class="list-inline-item">
+        <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-light text-decoration-none">Terms of Service</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-light text-decoration-none">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Set the createdBy userId from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const storedUser = localStorage.getItem("registeredUser");
+          let userId = null;
+
+          if (storedUser) {
+              const user = JSON.parse(storedUser);
+              userId = user.userId; // Extract userId correctly
+          }
+      if (userId) {
+        document.getElementById('createdBy').value = userId;
+      } else {
+        alert('User not logged in!');
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Create Task</title>-->
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container mt-4">-->
+<!--  <h2>Create Task</h2>-->
+<!--  <form th:action="@{/tasks/create}" th:object="${task}" method="post" id="taskForm">-->
+<!--    <div class="mb-3">-->
+<!--      <label for="title" class="form-label">Title</label>-->
+<!--      <input type="text" id="title" name="title" class="form-control" th:field="*{title}" required>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="description" class="form-label">Description</label>-->
+<!--      <textarea id="description" name="description" class="form-control" th:field="*{description}" required></textarea>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="location" class="form-label">Location</label>-->
+<!--      <input type="text" id="location" name="location" class="form-control" th:field="*{location}" required>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="skillsRequired" class="form-label">Skills Required</label>-->
+<!--      <input type="text" id="skillsRequired" name="skillsRequired" class="form-control" th:field="*{skillsRequired}" required>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="dateTime" class="form-label">Date and Time</label>-->
+<!--      <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" th:field="*{dateTime}" required>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="status" class="form-label">Status</label>-->
+<!--      <select id="status" name="status" class="form-select" th:field="*{status}" required>-->
+<!--        <option value="Open">Open</option>-->
+<!--        <option value="In Progress">In Progress</option>-->
+<!--        <option value="Closed">Closed</option>-->
+<!--      </select>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Hidden input for createdBy &ndash;&gt;-->
+<!--    <input type="hidden" id="createdBy" name="createdBy.userId" th:field="*{createdBy}"/>-->
+
+<!--    <button type="submit" class="btn btn-primary">Create Task</button>-->
+<!--  </form>-->
+
+<!--  <div th:if="${success}" class="alert alert-success mt-3">-->
+<!--    <p th:text="${success}"></p>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--  // Set the createdBy userId from localStorage-->
+<!--  document.addEventListener('DOMContentLoaded', function() {-->
+<!--    const storedUser = localStorage.getItem("registeredUser");-->
+<!--        let userId = null;-->
+
+<!--        if (storedUser) {-->
+<!--            const user = JSON.parse(storedUser);-->
+<!--            userId = user.userId; // Extract userId correctly-->
+<!--        }-->
+<!--    if (userId) {-->
+<!--      document.getElementById('createdBy').value = userId;-->
+<!--    } else {-->
+<!--      alert('User not logged in!');-->
+<!--    }-->
+<!--  });-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->

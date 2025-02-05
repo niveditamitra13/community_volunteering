@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -190,7 +190,7 @@
 
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <img src="assets/R_all.jpeg" style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"></img>
+    <img th:src="@{/R_all.jpeg}" style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"></img>
     <a class="navbar-brand" href="#">Community Volunteering</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -198,25 +198,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="registration.html">User Registration</a>
+          <a class="nav-link" href="/users/new">User Registration</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="opportunities.html">Opportunities</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Search.html">Search & Filter</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="TaskSignup.html">Signup</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Rating.html">Rating</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.html">Login</a>
+          <a class="nav-link" href="/users/login">Login</a>
         </li>
       </ul>
     </div>
@@ -267,7 +255,7 @@
         </form>
         <h3 style="text-align: center; padding-top: 16px;">Already Registered?
           <span>
-                            <a style="text-decoration-color: #4f46e5;" href="login.html">Login</a>
+                            <a style="text-decoration-color: #4f46e5;" href="/users/login">Login</a>
                         </span>
         </h3>
       </div>
@@ -352,7 +340,8 @@
               const savedUser = await response.json(); // Get saved user from API
 
               // Store user data (including userId) in local storage
-              localStorage.setItem('registeredUser', JSON.stringify(savedUser));
+              localStorage.setItem('registeredUser',
+              JSON.stringify(savedUser));
 
               // Show success message
               document.getElementById('modalMessage').textContent =
@@ -362,7 +351,11 @@
 
               // Redirect to tasks page after 2 seconds
               setTimeout(() => {
-                  window.location.href = "/tasks/search";
+                if(user.userType == 'volunteer' ) {
+                    window.location.href = "/tasks/search";
+                } else {
+                    window.location.href = "/tasks/create";
+                }
               }, 2000);
           } else {
               alert("Registration failed. Please try again.");
