@@ -20,7 +20,7 @@ Community Volunteering is a platform designed to connect volunteers with organiz
 ### Prerequisites
 - Java 17+
 - Maven
-- MySQL or PostgreSQL
+- MySQL or H2
 
 ### Steps to Set Up
 1. Clone the repository:
